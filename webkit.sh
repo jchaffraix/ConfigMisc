@@ -23,3 +23,15 @@ function setup_WebKit() {
 
     cd $WEBKIT_ROOT
 }
+
+function safe_update_webkit()
+{
+    # FIXME: Check for some scripts if not setup_WebKit called?
+    if [[ $OSTYPE =~ "darwin" ]]
+    then
+        echo "mac"
+        update-webkit --mac
+    fi
+
+    update-webkit --chromium
+}
