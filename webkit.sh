@@ -16,7 +16,10 @@ function setup_WebKit() {
 
     # FIXME: Should be conditional!!!
     export WEBKIT_ROOT="$HOME/Sources/WebKit"
-    export SVN_EDITOR="$WEBKIT_ROOT/Tools/Scripts/commit-log-editor"
+    export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
+
+    export SVN_EDITOR="commit-log-editor"
+    export GIT_EDITOR="commit-log-editor"
 
     cd $WEBKIT_ROOT
 }
