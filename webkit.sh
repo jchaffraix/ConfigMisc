@@ -5,7 +5,10 @@ function setup_WebKit() {
 
     # Needed by WebKit to run DRT.
     # FIXME: Qt specific?
-    xhost +local: > /dev/null 2>&1
+    if [[ $OSTYPE =~ "linux" ]]
+    then
+        xhost +local: > /dev/null 2>&1
+    fi
 
     ### Webkit Info
     export CHANGE_LOG_NAME="Julien Chaffraix"
