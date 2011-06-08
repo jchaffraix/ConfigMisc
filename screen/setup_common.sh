@@ -4,5 +4,3 @@
 # FIXME: Better way?
 source /etc/profile
 source ~/.bashrc
-
-echo "Foo"

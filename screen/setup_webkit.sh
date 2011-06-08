@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-# FIXME: Hardcoded!
+# FIXME: Hardcoded to .screen.
 source ~/.screen/setup_common.sh
-
-echo "Bar"
 
 setup_WebKit
