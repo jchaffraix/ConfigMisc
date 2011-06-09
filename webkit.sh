@@ -1,12 +1,12 @@
 function setup_WebKit() {
-    # Qt for now.
-    export PATH=$HOME/Deps/bin:$PATH
-    export QTDIR=$HOME/Deps/
-
     # Needed by WebKit to run DRT.
     # FIXME: Qt specific?
     if [[ $OSTYPE =~ "linux" ]]
     then
+        # Qt for now.
+        export PATH=$HOME/Deps/bin:$PATH
+        export QTDIR=$HOME/Deps/
+
         xhost +local: > /dev/null 2>&1
     fi
 
