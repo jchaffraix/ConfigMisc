@@ -20,10 +20,10 @@ function build_chromium()
     if [[ $OSTYPE =~ "darwin" ]]
     then
         pushd build/
-        xcodebuild -project all.xcodeproj -configuration Debug -target All
+        xcodebuild -project chrome.xcodeproj -configuration Debug -target chrome
         popd
     elif [[ $OSTYPE =~ "linux" ]]
     then
-        make -j$(logical_core_nums)
+        make -j$(logical_core_nums) chrome
     fi
 }
