@@ -49,3 +49,19 @@ function build_chromium()
         make -j$(logical_core_nums) chrome
     fi
 }
+
+function update_chromium()
+{
+    if [ ! -d "build" ]
+    then
+        echo "Not in the Chromium root!"
+        return 1
+    fi
+
+    gclient sync
+
+    if [ -d $WEBKIT_ROOT/.git ]
+    then
+        tools/sync-webkit-git.py
+    fi
+}
