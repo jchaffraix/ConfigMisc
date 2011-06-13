@@ -5,6 +5,8 @@ function logical_core_nums()
 
 function setup_Chromium()
 {
+    export TRYBOT_RESULTS_EMAIL_ADDRESS="jchaffraix@chromium.org"
+
     export CHROMIUM_ROOT=$HOME/Sources/Chromium/src
     export WEBKIT_ROOT=$CHROMIUM_ROOT/third_party/WebKit/
     export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
