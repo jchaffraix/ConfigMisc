@@ -9,17 +9,35 @@ function setup_Chromium()
     cd $CHROMIUM_ROOT
 }
 
+# FIXME: Merge the 2 build methods!
+function build_all()
+{
+    if [ ! -d "build" ]
+    then
+        echo "Not in the Chromium root!"
+        return 1
+    fi
+    if [[ $OSTYPE =~ "darwin" ]]
+    then
+        pushd build/
+        xcodebuild -project all.xcodeproj -configuration Debug -target All
+        popd
+    elif [[ $OSTYPE =~ "linux" ]]
+    then
+        make -j$(logical_core_nums)
+    fi
+}
+
 function build_chromium()
 {
     if [ ! -d "build" ]
     then
         echo "Not in the Chromium root!"
-        return
+        return 1
     fi
-
     if [[ $OSTYPE =~ "darwin" ]]
     then
-        pushd build/
+        pushd chrome/
         xcodebuild -project chrome.xcodeproj -configuration Debug -target chrome
         popd
     elif [[ $OSTYPE =~ "linux" ]]
