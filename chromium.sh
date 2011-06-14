@@ -68,3 +68,22 @@ function update_chromium()
         tools/sync-webkit-git.py
     fi
 }
+
+function profile_test_shell()
+{
+    if [ ! -d "build" ]
+    then
+        echo "Not in the Chromium root!"
+        return 1
+    fi
+
+    if [ -z $1 ]
+    then
+        echo "USage profile_test_shell URL";
+        return 1
+    fi
+
+    # FIXME: Debug is hardcoded and we don't check for compiled bits!
+    url=`echo $1 | sed -e 's/\&/\\\&/'`
+    out/Debug/test_shell --profiler "javascript:(new chromium.Profiler).start(); window.location=\"$url\""
+}
