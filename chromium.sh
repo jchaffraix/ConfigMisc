@@ -10,6 +10,11 @@ function setup_Chromium()
     # Enable profiling by default
     export GYP_DEFINES="$GYP_DEFINES profiling=1"
 
+    ### Webkit Info
+    # FIXME: Share them somehow.
+    export CHANGE_LOG_NAME="Julien Chaffraix"
+    export EMAIL_ADDRESS="jchaffraix@webkit.org"
+
     export CHROMIUM_ROOT=$HOME/Sources/Chromium/src
     export WEBKIT_ROOT=$CHROMIUM_ROOT/third_party/WebKit/
     export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
