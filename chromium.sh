@@ -16,7 +16,30 @@ function setup_Chromium()
     cd $CHROMIUM_ROOT
 }
 
-# FIXME: Merge the 2 build methods!
+# FIXME: Should be internal.
+function build() {
+    if [ -z $1 ]
+    then
+        echo "Need the build type!"
+        return 1
+    fi
+
+    if [ -z $2 ]
+    then
+        echo "Need the build target!"
+        return 2
+    fi
+
+    if [[ $OSTYPE =~ "darwin" ]]
+    then
+        xcodebuild -project all.xcodeproj -configuration $1 -target $2
+    elif [[ $OSTYPE =~ "linux" ]]
+    then
+        make BUILDTYPE=$1 -j$(logical_core_nums) $2
+    fi
+    
+}
+
 function build_all()
 {
     if [ ! -d "build" ]
@@ -24,15 +47,7 @@ function build_all()
         echo "Not in the Chromium root!"
         return 1
     fi
-    if [[ $OSTYPE =~ "darwin" ]]
-    then
-        pushd build/
-        xcodebuild -project all.xcodeproj -configuration Debug -target All
-        popd
-    elif [[ $OSTYPE =~ "linux" ]]
-    then
-        make -j$(logical_core_nums)
-    fi
+    build "Debug" "All";
 }
 
 function build_chromium()
@@ -42,15 +57,8 @@ function build_chromium()
         echo "Not in the Chromium root!"
         return 1
     fi
-    if [[ $OSTYPE =~ "darwin" ]]
-    then
-        pushd chrome/
-        xcodebuild -project chrome.xcodeproj -configuration Debug -target chrome
-        popd
-    elif [[ $OSTYPE =~ "linux" ]]
-    then
-        make -j$(logical_core_nums) chrome
-    fi
+    build "Debug" "Chrome";
+    return $?
 }
 
 function update_chromium()
@@ -69,7 +77,7 @@ function update_chromium()
     fi
 }
 
-function profile_test_shell()
+function prof_release_test_shell()
 {
     if [ ! -d "build" ]
     then
@@ -77,13 +85,23 @@ function profile_test_shell()
         return 1
     fi
 
+    profile_test_shell "Release" $1
+}
+
+function profile_test_shell()
+{
     if [ -z $1 ]
     then
-        echo "USage profile_test_shell URL";
+        echo "Need a build type!"
+        return 1
+    fi
+    if [ -z $2 ]
+    then
+        echo "Usage profile_test_shell URL";
         return 1
     fi
 
     # FIXME: Debug is hardcoded and we don't check for compiled bits!
-    url=`echo $1 | sed -e 's/\&/\\\&/'`
-    out/Debug/test_shell --profiler "javascript:(new chromium.Profiler).start(); window.location=\"$url\""
+    url=`echo $2 | sed -e 's/\&/\\\&/'`
+    out/$1/test_shell --profiler "javascript:(new chromium.Profiler).start(); window.location=\"$url\""
 }
