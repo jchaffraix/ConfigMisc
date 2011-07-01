@@ -90,14 +90,14 @@ function prof_release_test_shell()
         return 1
     fi
 
-    profile_test_shell "Release" $1
+    profile_test_shell "out/Release" $1
 }
 
 function profile_test_shell()
 {
     if [ -z $1 ]
     then
-        echo "Need a build type!"
+        echo "Need a build directory!"
         return 1
     fi
     if [ -z $2 ]
@@ -108,5 +108,5 @@ function profile_test_shell()
 
     # FIXME: Debug is hardcoded and we don't check for compiled bits!
     url=`echo $2 | sed -e 's/\&/\\\&/'`
-    out/$1/test_shell --profiler "javascript:(new chromium.Profiler).start(); window.location=\"$url\""
+    $1/test_shell --profiler "javascript:(new chromium.Profiler).start(); window.location=\"$url\""
 }
