@@ -1,4 +1,10 @@
-function setup_WebKit() {
+function setup_WebKit_Env() {
+    if [ -z $1 ]
+    then
+        echo "Need a WebKit root directory!"
+        return 1
+    fi
+
     # Needed by WebKit to run DRT.
     # FIXME: Qt specific?
     if [[ $OSTYPE =~ "linux" ]]
@@ -14,8 +20,7 @@ function setup_WebKit() {
     export CHANGE_LOG_NAME="Julien Chaffraix"
     export EMAIL_ADDRESS="jchaffraix@webkit.org"
 
-    # FIXME: Should be conditional!!!
-    export WEBKIT_ROOT="$HOME/Sources/WebKit"
+    export WEBKIT_ROOT=$1
     export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
 
     export SVN_EDITOR="commit-log-editor"
