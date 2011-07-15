@@ -29,16 +29,22 @@ function setup_WebKit_Env() {
     cd $WEBKIT_ROOT
 }
 
+# Update WebKit and make sure Chromiue is up-to-date.
 function safe_update_webkit()
 {
-    # FIXME: Check for some scripts if not setup_WebKit called?
+    # FIXME: Check if update-webkit is in the path?
+    extra_flags=""
     if [[ $OSTYPE =~ "darwin" ]]
     then
-        echo "mac"
-        update-webkit --mac
+        extra_flags+="--mac"
     fi
 
-    update-webkit --chromium
+    update-webkit $extra_flags
+    if [ $? -ne 0 ]
+    then
+        return;
+    fi
+    update-webkit-chromium
 }
 
 # Apply an attachment making sure Chromium is up-to-date.
