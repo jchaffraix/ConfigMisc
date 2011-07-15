@@ -40,3 +40,15 @@ function safe_update_webkit()
 
     update-webkit --chromium
 }
+
+# Apply an attachment making sure Chromium is up-to-date.
+function safe_apply_attachment()
+{
+    if [ -z $1 ]
+    then
+        echo "Need a attachment id"
+        return
+    fi
+    webkit-patch apply-attachment $1
+    update-webkit-chromium
+}
