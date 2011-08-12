@@ -62,3 +62,21 @@ function safe_apply_attachment()
     fi
     update-webkit-chromium
 }
+
+function debug_chromium()
+{
+    if [ -z $1 ]
+    then
+        echo "Need to know what to debug"
+        return
+    fi
+
+    if [[ $1 =~ "^/" ]]
+    then
+        pass=`pwd`
+        $1 = $pass/$1
+    fi
+
+    gdb --args out/Debug/DumpRenderTree --no-timeout $1
+}
+
