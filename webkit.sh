@@ -56,5 +56,9 @@ function safe_apply_attachment()
         return
     fi
     webkit-patch apply-attachment $1
+    if [ $? -ne 0 ]
+    then
+        return;
+    fi
     update-webkit-chromium
 }
