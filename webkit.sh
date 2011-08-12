@@ -80,3 +80,14 @@ function debug_chromium()
     gdb --args out/Debug/DumpRenderTree --no-timeout $1
 }
 
+function fetch_attachment()
+{
+    if [ -z $1 ]
+    then
+        echo "Need an attachment #"
+        return
+    fi
+
+    # FIXME: Check that $1 is a number.
+    curl -L -o $1.diff "https://bugs.webkit.org/attachment.cgi?id=$1"
+}
