@@ -74,7 +74,9 @@ function update_chromium()
         return 1
     fi
 
-    gclient sync
+    # --delete_unversioned: delete any dependency that have been removed from
+    # last sync as long as there is no local modification (from the help).
+    gclient sync --delete_unversioned
 
     if [ -d $WEBKIT_ROOT/.git ]
     then
