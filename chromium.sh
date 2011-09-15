@@ -7,8 +7,8 @@ function setup_Chromium()
 {
     export TRYBOT_RESULTS_EMAIL_ADDRESS="jchaffraix@chromium.org"
 
-    # Enable profiling by default
-    export GYP_DEFINES="$GYP_DEFINES profiling=1"
+    # Enable profiling and heapchecker (tcmalloc) by default
+    export GYP_DEFINES="$GYP_DEFINES profiling=1 linux_use_heapchecker=1 linux_keep_shadow_stacks=1 linux_use_tcmalloc=1"
 
     ### Webkit Info
     # FIXME: Share them somehow.
