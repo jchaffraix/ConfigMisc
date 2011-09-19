@@ -32,14 +32,7 @@ function setup_WebKit_Env() {
 # Update WebKit and make sure Chromiue is up-to-date.
 function safe_update_webkit()
 {
-    # FIXME: Check if update-webkit is in the path?
-    extra_flags=""
-    if [[ $OSTYPE =~ "darwin" ]]
-    then
-        extra_flags+="--mac"
-    fi
-
-    update-webkit $extra_flags
+    update-webkit
     if [ $? -ne 0 ]
     then
         return;
