@@ -3,22 +3,55 @@ function logical_core_nums()
     echo `cat /proc/cpuinfo|grep processor|wc -l`
 }
 
-function setup_Chromium()
+function setup_ASAN_build()
 {
+    export GYP_DEFINES="$GYP_DEFINES asan=1 linux_use_tcmalloc=0 release_extra_cflags=\"-g\""
+
+    # ASAN
+    export ASAN=$CHROMIUM_ROOT/third_party/asan
+    export ASAN_BIN=$ASAN/asan_clang_Linux/bin
+    export BLACKLIST="-mllvm -asan-blacklist=$ASAN/asan_blacklist.txt"
+    export CC="$ASAN_BIN/clang $BLACKLIST"
+    export CXX="$ASAN_BIN/clang++ $BLACKLIST"
+    if [ ! -d $ASAN ]
+    then
+        update_chromium
+        if [ ! -d $ASAN ]
+        then
+            echo "Error: ASAN not installed. Make sure you follow the instruction to set it up."
+            return 1
+        fi
+    fi
+    gclient runhooks
+}
+
+function setup_Chromium_Env()
+{
+    if [ -z $1 ]
+    then
+        echo "Need a Chromium root directory!"
+        return 1
+    fi
+
+
     export TRYBOT_RESULTS_EMAIL_ADDRESS="jchaffraix@chromium.org"
 
-    # Enable profiling and heapchecker (tcmalloc) by default
-    export GYP_DEFINES="$GYP_DEFINES profiling=1 linux_use_heapchecker=1 linux_keep_shadow_stacks=1 linux_use_tcmalloc=1"
+    # Enable profiling by default but not ASAN (it slows down debug builds and can break the build)
+    export GYP_DEFINES="$GYP_DEFINES profiling=1"
+    # Use those to enable heapchecker. For now it is too fragile!
+    #export GYP_DEFINES="$GYP_DEFINES linux_use_heapchecker=1 linux_keep_shadow_stacks=1 linux_use_tcmalloc=1"
 
     ### Webkit Info
     # FIXME: Share them somehow.
+    export CHROMIUM_ROOT=$1
     export CHANGE_LOG_NAME="Julien Chaffraix"
     export EMAIL_ADDRESS="jchaffraix@webkit.org"
 
-    export CHROMIUM_ROOT=$HOME/Sources/Chromium/src
     export WEBKIT_ROOT=$CHROMIUM_ROOT/third_party/WebKit/
     export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
+
     cd $CHROMIUM_ROOT
+
 }
 
 # FIXME: Should be internal.
