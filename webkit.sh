@@ -48,12 +48,21 @@ function safe_apply_attachment()
         echo "Need a attachment id"
         return
     fi
-    webkit-patch apply-attachment $1
+    # Until #40095 is solved, I don't want to use that.
+    # webkit-patch apply-attachment $1
+    safe_update_webkit
+
+    fetch_attachment $1
     if [ $? -ne 0 ]
     then
         return;
     fi
-    update-webkit-chromium
+
+    svn-apply --force < $1.diff
+    if [ $? -ne 0 ]
+    then
+        return;
+    fi
 }
 
 function debug_chromium()
