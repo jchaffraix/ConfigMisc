@@ -84,3 +84,22 @@ function fetch_attachment()
     # FIXME: Check that $1 is a number.
     curl -L -o $1.diff "https://bugs.webkit.org/attachment.cgi?id=$1"
 }
+
+# Define some alias to be shared.
+alias aa="safe_apply_attachment"
+alias upw="safe_update_webkit"
+alias wp="webkit-patch"
+alias wpu="webkit-patch upload"
+
+# Handle distributed computing.
+if [ -z $DISTRIBUTED_COMPILING ]
+then
+    NUM_PROCS=`cat /proc/cpuinfo|grep processor|wc -l`
+else
+    NUM_PROCS=100
+fi
+
+alias bcd="echo \"Building Chromium Debug\"; build-webkit --debug --chromium --makeargs=\"-j$NUM_PROCS\""
+alias bcr="echo \"Building Chromium Release\"; build-webkit --release --chromium --makeargs=\"-j$NUM_PROCS\""
+alias bqd="echo \"Building Qt Debug\"; build-webkit --debug --qt --makeargs=\"-j$NUM_PROCS\" --qmakeargs=\"CONFIG+=force_static_libs_as_shared\""
+alias bqr="echo \"Building Qt Release\"; build-webkit --release --qt --makeargs=\"-j$NUM_PROCS\" --qmakeargs=\"CONFIG+=force_static_libs_as_shared\""
