@@ -33,7 +33,6 @@ function setup_Chromium_Env()
         return 1
     fi
 
-
     export TRYBOT_RESULTS_EMAIL_ADDRESS="jchaffraix@chromium.org"
 
     # Enable profiling by default but not ASAN (it slows down debug builds and can break the build)
@@ -41,17 +40,11 @@ function setup_Chromium_Env()
     # Use those to enable heapchecker. For now it is too fragile!
     #export GYP_DEFINES="$GYP_DEFINES linux_use_heapchecker=1 linux_keep_shadow_stacks=1 linux_use_tcmalloc=1"
 
-    ### Webkit Info
-    # FIXME: Share them somehow.
+    ### Setup Webkit Info
     export CHROMIUM_ROOT=$1
-    export CHANGE_LOG_NAME="Julien Chaffraix"
-    export EMAIL_ADDRESS="jchaffraix@webkit.org"
-
-    export WEBKIT_ROOT=$CHROMIUM_ROOT/third_party/WebKit/
-    export PATH=$PATH:$WEBKIT_ROOT/Tools/Scripts
+    setup_WebKit_Env $1/third_party/WebKit/
 
     cd $CHROMIUM_ROOT
-
 }
 
 # FIXME: Should be internal.
