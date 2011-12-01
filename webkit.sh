@@ -101,5 +101,5 @@ fi
 
 alias bcd="echo \"Building Chromium Debug\"; build-webkit --debug --chromium --makeargs=\"-j$NUM_PROCS\""
 alias bcr="echo \"Building Chromium Release\"; build-webkit --release --chromium --makeargs=\"-j$NUM_PROCS\""
-alias bqd="echo \"Building Qt Debug\"; build-webkit --debug --qt --makeargs=\"-j$NUM_PROCS\" --qmakeargs=\"CONFIG+=force_static_libs_as_shared\""
-alias bqr="echo \"Building Qt Release\"; build-webkit --release --qt --makeargs=\"-j$NUM_PROCS\" --qmakeargs=\"CONFIG+=force_static_libs_as_shared\""
+alias bqd="echo \"Building Qt Debug\"; build-webkit --debug --qt --makeargs=\"-j$NUM_PROCS\" --qmakearg=\"CONFIG+=force_static_libs_as_shared\""
+alias bqr="echo \"Building Qt Release\"; build-webkit --release --qt --makeargs=\"-j$NUM_PROCS\" --qmakearg=\"CONFIG+=force_static_libs_as_shared\""
