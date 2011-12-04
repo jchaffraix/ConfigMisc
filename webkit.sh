@@ -94,7 +94,13 @@ alias wpu="webkit-patch upload"
 # Handle distributed computing.
 if [ -z $DISTRIBUTED_COMPILING ]
 then
-    NUM_PROCS=`cat /proc/cpuinfo|grep processor|wc -l`
+    if [[ $OSTYPE =~ "linux" ]]
+    then
+        NUM_PROCS=`cat /proc/cpuinfo|grep processor|wc -l`
+    else
+        # FIXME: Hardcoded.
+        NUM_PROCS=5
+    fi
 else
     NUM_PROCS=100
 fi
