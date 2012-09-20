@@ -102,7 +102,7 @@ then
         NUM_PROCS=5
     fi
 else
-    NUM_PROCS=100
+    NUM_PROCS=4000
 fi
 
 alias bcd="echo \"Building Chromium Debug\"; build-webkit --debug --chromium --makeargs=\"-j$NUM_PROCS\""
