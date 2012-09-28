@@ -1,6 +1,15 @@
 function logical_core_nums()
 {
-    echo `cat /proc/cpuinfo|grep processor|wc -l`
+    if [[ $OSTYPE =~ "darwin" ]]
+    then
+        echo `sysctl -n hw.logicalcpu`
+    elif [[ $OSTYPE =~ "linux" ]]
+    then
+        echo `cat /proc/cpuinfo|grep processor|wc -l`
+        return
+    else
+        echo "Unknow platform"
+    fi
 }
 
 function setup_ASAN_build()
