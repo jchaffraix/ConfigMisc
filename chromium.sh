@@ -45,7 +45,7 @@ function setup_Chromium_Env()
     export TRYBOT_RESULTS_EMAIL_ADDRESS="jchaffraix@chromium.org"
 
     # Enable profiling by default but not ASAN (it slows down debug builds and can break the build)
-    export GYP_DEFINES="$GYP_DEFINES profiling=1"
+    export GYP_DEFINES="$GYP_DEFINES profiling=1 release_extra_cflags=-fno-omit-frame-pointer disable_pie=1"
     # Use those to enable heapchecker. For now it is too fragile!
     #export GYP_DEFINES="$GYP_DEFINES linux_use_heapchecker=1 linux_keep_shadow_stacks=1 linux_use_tcmalloc=1"
 
