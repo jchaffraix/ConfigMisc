@@ -1,0 +1,19 @@
+hardstatus alwayslastline "%{=b}%{G} Screen(s): %{b}%w %=%{kG}%C%A  %D, %M/%d/%Y "
+autodetach on
+escape ^Ja
+# Disable the visual bell, too annoying.
+vbell off
+
+# FIXME: Improve by src'ing the right files, see Chromium bindings + scripts in ~/.screen/
+screen -t WebKit 0 bash
+screen -t WebKit 1 bash
+screen -t mac 7 bash
+screen -t mac 8 bash
+screen -t irssi 9 irssi
+
+bindkey "^9" select 9
+# Triggered during autocompletion?
+#bindkey "^I" screen -t irssi 9 irssi
+# Crash with ctag autocompletion. It also matches another existing binding... Sigh...
+# bindkey "^}" screen -t WebKit bash --rcfile .screen/setup_webkit.sh
+bindkey "^|" screen -t Chromium bash --rcfile .screen/setup_chromium.sh
