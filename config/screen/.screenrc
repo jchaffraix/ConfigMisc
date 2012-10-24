@@ -16,4 +16,4 @@ bindkey "^9" select 9
 #bindkey "^I" screen -t irssi 9 irssi
 # Crash with ctag autocompletion. It also matches another existing binding... Sigh...
 # bindkey "^}" screen -t WebKit bash --rcfile .screen/setup_webkit.sh
-bindkey "^|" screen -t Chromium bash --rcfile .screen/setup_chromium.sh
+bindkey "^|" screen -t Chromium bash --rcfile $SCRIPTS/screen/setup_chromium.sh
