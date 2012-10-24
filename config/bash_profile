@@ -1,0 +1,37 @@
+# Typos aliases.
+alias sl='ls'
+
+# Term colors.
+# See http://ascii-table.com/ansi-escape-sequences.php
+COLOR_DOMAIN="\[\033[0;37m\]" # white
+COLOR_PATH="\[\033[1;34m\]"   # bold blue
+COLOR_BRANCH="\[\033[1;33m\]" # yellow
+COLOR_DOLLAR="\[\033[0;37m\]" # white
+COLOR_NONE="\[\033[0m\]"      # reset
+export PS1="$COLOR_DOMAIN\u@\h: $COLOR_PATH\w$COLOR_BRANCH \$(git name-rev --name-only HEAD 2> /dev/null) $COLOR_DOLLAR\$$COLOR_NONE "
+
+# Common directories.
+# $TOOLS is expected to be set before calling this file.
+# FIXME: Enforce this!
+export SOURCES=$HOME/Projects/
+export SCRIPTS=$TOOLS/Scripts/
+
+export PATH=$TOOLS/depot_tools:$PATH:$SCRIPTS/git
+
+source $SCRIPTS/webkit.sh
+source $SCRIPTS/chromium.sh
+
+alias setup_WebKit="setup_WebKit_Env $SOURCES/WebKit"
+alias setup_WebKitGardening="setup_WebKit_Env $SOURCES/Gardening/WebKit"
+
+alias setup_Chromium="setup_Chromium_Env $SOURCES/Chromium/src"
+alias setup_ChromiumGardening="setup_Chromium_Env $SOURCES/Gardening/ChromiumCommit/src"
+
+alias sw="setup_WebKit"
+alias swg="setup_WebKitGardening"
+
+alias sc="setup_Chromium"
+alias scg="setup_ChromiumGardening"
+
+# Ninja
+export GYP_GENERATORS='ninja'
