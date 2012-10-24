@@ -6,7 +6,6 @@ function logical_core_nums()
     elif [[ $OSTYPE =~ "linux" ]]
     then
         echo `cat /proc/cpuinfo|grep processor|wc -l`
-        return
     else
         echo "Unknow platform"
     fi
