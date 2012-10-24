@@ -13,6 +13,11 @@ function logical_core_nums()
 
 function setup_ASAN_build()
 {
+    if [ ! -f $CHROMIUM_ROOT/third_party/llvm-build/Release+Asserts/bin/clang ]
+    then
+        $CHROMIUM_ROOT/tools/clang/scripts/update.sh
+    fi
+
     export GYP_DEFINES="$GYP_DEFINES asan=1 release_extra_cflags=\"-g\""
     if [[ $OSTYPE =~ "darwin" ]]
     then
