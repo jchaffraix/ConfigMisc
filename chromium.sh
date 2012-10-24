@@ -13,23 +13,16 @@ function logical_core_nums()
 
 function setup_ASAN_build()
 {
-    export GYP_DEFINES="$GYP_DEFINES asan=1 linux_use_tcmalloc=0 release_extra_cflags=\"-g\""
-
-    # ASAN
-    export ASAN=$CHROMIUM_ROOT/third_party/asan
-    export ASAN_BIN=$ASAN/asan_clang_Linux/bin
-    export BLACKLIST="-mllvm -asan-blacklist=$ASAN/asan_blacklist.txt"
-    export CC="$ASAN_BIN/clang $BLACKLIST"
-    export CXX="$ASAN_BIN/clang++ $BLACKLIST"
-    if [ ! -d $ASAN ]
+    export GYP_DEFINES="$GYP_DEFINES asan=1 release_extra_cflags=\"-g\""
+    if [[ $OSTYPE =~ "darwin" ]]
     then
-        update_chromium
-        if [ ! -d $ASAN ]
-        then
-            echo "Error: ASAN not installed. Make sure you follow the instruction to set it up."
-            return 1
-        fi
+        export GYP_DEFINES="$GYP_DEFINES component=static_library"
+        export DYLD_NO_PIE=1
+    elif [[ $OSTYPE =~ "linux" ]]
+    then
+        export GYP_DEFINES="$GYP_DEFINES linux_use_tcmalloc=0"
     fi
+
     gclient runhooks
 }
 
