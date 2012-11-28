@@ -102,7 +102,12 @@ then
         NUM_PROCS=5
     fi
 else
-    NUM_PROCS=4000
+    if [[ $OSTYPE =~ "darwin" ]]
+    then
+        NUM_PROCS=80
+    else
+        NUM_PROCS=4000
+    fi
 fi
 
 alias bcd="echo \"Building Chromium Debug\"; build-webkit --debug --chromium --makeargs=\"-j$NUM_PROCS\""
