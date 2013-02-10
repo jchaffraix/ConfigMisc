@@ -4,7 +4,9 @@ servers = (
   {
     address = "irc.freenode.net";
     chatnet = "FreeNode";
-    port = "6667";
+    port = "7000";
+    use_ssl = "Yes";
+    ssl_verify = "Yes";
     autoconnect = "Yes";
     alternate_nick = "jchaffraix_ jchaffraix__ jchaffraix___";
   },
@@ -33,7 +35,8 @@ chatnets = {
   };
   FreeNode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify <password>";
+    # Wait 2 seconds to allow time for being registered.
+    autosendcmd = "/msg nickserv identify <password>; wait 2000";
   };
   Undernet = { type = "IRC"; };
   Mozilla = { type = "IRC"; };
@@ -46,18 +49,8 @@ channels = (
   { name = "#qtwebkit"; chatnet = "FreeNode"; autojoin = "Yes"; },
   { name = "#webkitgtk+"; chatnet = "FreeNode"; autojoin = "Yes"; },
   { name = "#webkit-fr"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { 
-    name = "#webkit-inspector";
-    chatnet = "FreeNode";
-    autojoin = "Yes";
-  },
   { name = "#chromium"; chatnet = "FreeNode"; autojoin = "Yes"; },
   { name = "#curl"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { 
-    name = "#libreoffice-dev";
-    chatnet = "FreeNode";
-    autojoin = "Yes";
-  },
   { name = "#content"; chatnet = "Mozilla"; autojoin = "Yes"; },
 );
 
