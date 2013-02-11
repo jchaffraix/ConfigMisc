@@ -104,9 +104,9 @@ then
 else
     if [[ $OSTYPE =~ "darwin" ]]
     then
-        NUM_PROCS=50
+        NUM_PROCS=80
     else
-        NUM_PROCS=4000
+        NUM_PROCS=100
     fi
 fi
 
