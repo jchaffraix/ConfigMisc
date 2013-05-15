@@ -48,7 +48,7 @@ function setup_Chromium_Env()
 
     ### Setup Webkit Info
     export CHROMIUM_ROOT=$1
-    setup_WebKit_Env $1/third_party/WebKit/
+    setup_Blink_Env $1/third_party/WebKit/
 
     cd $CHROMIUM_ROOT
 }

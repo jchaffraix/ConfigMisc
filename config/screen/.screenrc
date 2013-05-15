@@ -5,8 +5,8 @@ escape ^Ja
 vbell off
 
 # FIXME: Improve by src'ing the right files, see Chromium bindings + scripts in ~/.screen/
-screen -t WebKit 0 bash
-screen -t WebKit 1 bash
+screen -t Blink 0 bash
+screen -t Blink 1 bash
 screen -t mac 7 bash
 screen -t mac 8 bash
 screen -t irssi 9 irssi
