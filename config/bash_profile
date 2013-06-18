@@ -40,3 +40,5 @@ alias sb="setup_Blink"
 
 # Ninja
 export GYP_GENERATORS='ninja'
+
+export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
