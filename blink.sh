@@ -36,7 +36,7 @@ else
     fi
 fi
 
-alias bbd="echo \"Building Blink Debug\"; ninja -Cout/Debug -j$NUM_PROCS all_webkit"
-alias bbr="echo \"Building Blink Release\"; ninja -Cout/Release -j$NUM_PROCS all_webkit"
+alias bbd="echo \"Building Blink Debug\"; ninja -Cout/Debug -j$NUM_PROCS blink_tests"
+alias bbr="echo \"Building Blink Release\"; ninja -Cout/Release -j$NUM_PROCS blink_tests"
 alias bcd="echo \"Building Chrome Debug\"; ninja -Cout/Debug -j$NUM_PROCS chrome"
 alias bcr="echo \"Building Chrome Release\"; ninja -Cout/Release -j$NUM_PROCS chrome"
