@@ -12,6 +12,11 @@ function setup_Blink_Env()
     cd $CHROMIUM_ROOT
 }
 
+function update_Blink()
+{
+    git pull -r && pushd third_party/WebKit/ && git pull -r && popd && gclient sync
+}
+
 # Define some alias to be shared.
 alias aa="git cl patch"
 alias upb="gclient sync"
@@ -40,3 +45,4 @@ alias bbd="echo \"Building Blink Debug\"; ninja -Cout/Debug -j$NUM_PROCS blink_t
 alias bbr="echo \"Building Blink Release\"; ninja -Cout/Release -j$NUM_PROCS blink_tests"
 alias bcd="echo \"Building Chrome Debug\"; ninja -Cout/Debug -j$NUM_PROCS chrome"
 alias bcr="echo \"Building Chrome Release\"; ninja -Cout/Release -j$NUM_PROCS chrome"
+alias upb="update_Blink"
