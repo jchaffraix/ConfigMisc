@@ -33,11 +33,12 @@ then
         NUM_PROCS=5
     fi
 else
+    export GYP_DEFINES="$GYP_DEFINES use_goma=1"
     if [[ $OSTYPE =~ "darwin" ]]
     then
         NUM_PROCS=80
     else
-        NUM_PROCS=100
+        NUM_PROCS=4000
     fi
 fi
 
