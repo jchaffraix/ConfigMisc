@@ -44,11 +44,11 @@ chatnets = {
 
 channels = (
   # values: name, "chatnet", "autojoin", "password", "botmasks", "autosendcmd"
-
+  { name = "#content"; chatnet = "Mozilla"; autojoin = "Yes"; },
+  { name = "#blink", chatnet = "FreeNode"; autojoin = "Yes; },
+  { name = "#chromium"; chatnet = "FreeNode"; autojoin = "Yes"; },
   { name = "#webkit"; chatnet = "FreeNode"; autojoin = "Yes"; },
   { name = "#webkit-fr"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { name = "#chromium"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { name = "#content"; chatnet = "Mozilla"; autojoin = "Yes"; },
 );
 
 aliases = {
