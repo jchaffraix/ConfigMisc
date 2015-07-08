@@ -18,9 +18,36 @@ function update_Blink()
 }
 
 # Define some alias to be shared.
-alias aa="git cl patch"
-alias upb="gclient sync"
-alias up="git cl upload"
+alias upb="update_Blink"
+alias gcp="git cl patch"
+alias gcu="git cl upload"
+
+function blink_move_to() {
+    if [ -z $1 ]
+    then
+        cd $CHROMIUM_ROOT
+        return 0
+    fi
+
+    # Handle web.
+    if [ $1 = "web" ]
+    then
+        cd "$CHROMIUM_ROOT/third_party/WebKit/Source/web"
+        return 0
+    fi
+
+    directory="$CHROMIUM_ROOT/third_party/WebKit/Source/core/$1"
+    if [ -d $directory ]
+    then
+        cd $directory
+        return 0
+    else
+        echo "Unknow directory $directory"
+        return 1
+    fi
+}
+
+alias cb=blink_move_to
 
 # Handle distributed computing.
 if [ -z $DISTRIBUTED_COMPILING ]
@@ -46,4 +73,3 @@ alias bbd="echo \"Building Blink Debug\"; ninja -Cout/Debug -j$NUM_PROCS blink_t
 alias bbr="echo \"Building Blink Release\"; ninja -Cout/Release -j$NUM_PROCS blink_tests"
 alias bcd="echo \"Building Chrome Debug\"; ninja -Cout/Debug -j$NUM_PROCS chrome"
 alias bcr="echo \"Building Chrome Release\"; ninja -Cout/Release -j$NUM_PROCS chrome"
-alias upb="update_Blink"
