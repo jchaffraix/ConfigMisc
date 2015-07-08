@@ -36,7 +36,7 @@ chatnets = {
   FreeNode = {
     type = "IRC";
     # Wait 2 seconds to allow time for being registered.
-    autosendcmd = "/msg nickserv identify <password>; wait 2000";
+    autosendcmd = "/msg nickserv identify Fr33node1RC; wait 2000";
   };
   Undernet = { type = "IRC"; };
   Mozilla = { type = "IRC"; };
