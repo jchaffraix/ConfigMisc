@@ -19,3 +19,6 @@ set showcmd
 "Searching
 set ignorecase
 set smartcase
+
+"Ruler gives the position. It's off on Mac.
+set ruler
