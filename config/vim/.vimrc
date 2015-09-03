@@ -22,3 +22,6 @@ set smartcase
 
 "Ruler gives the position. It's off on Mac.
 set ruler
+
+"Highlight anything wider than 80 columns
+match ErrorMsg '\%>80v.\+'
