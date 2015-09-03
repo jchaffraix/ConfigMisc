@@ -9,6 +9,9 @@ function setup_Blink_Env()
     export CHROMIUM_ROOT=$1
     export PATH=$PATH:$CHROMIUM_ROOT/third_party/WebKit/Tools/Scripts
 
+    # Force the component build, better for incremental builds.
+    export GYP_DEFINES="component=shared_library"
+
     cd $CHROMIUM_ROOT
 }
 
