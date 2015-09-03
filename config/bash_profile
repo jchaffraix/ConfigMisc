@@ -50,6 +50,8 @@ function git_grep_to_vim() {
 }
 alias vig=git_grep_to_vim
 
+alias gg="git grep"
+
 # Ninja
 export GYP_GENERATORS='ninja'
 
