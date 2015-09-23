@@ -18,20 +18,14 @@ export SCRIPTS=$TOOLS/Scripts/
 
 export PATH=$TOOLS/depot_tools:$PATH:$SCRIPTS/git
 
-source $SCRIPTS/webkit.sh
 source $SCRIPTS/blink.sh
 source $SCRIPTS/chromium.sh
 
-alias setup_WebKit="setup_WebKit_Env $SOURCES/WebKit"
-alias setup_WebKitGardening="setup_WebKit_Env $SOURCES/Gardening/WebKit"
 alias setup_Chromium="setup_Chromium_Env $SOURCES/Chromium/src"
 alias setup_ChromiumGardening="setup_Chromium_Env $SOURCES/Gardening/ChromiumCommit/src"
 
 alias setup_Blink="setup_Blink_Env $SOURCES/Blink/src"
 alias setup_Blink_Glitter="setup_Blink_Env $SOURCES/GlitterBlink/src"
-
-alias sw="setup_WebKit"
-alias swg="setup_WebKitGardening"
 
 alias sc="setup_Chromium"
 alias scg="setup_ChromiumGardening"
