@@ -11,8 +11,7 @@ COLOR_NONE="\[\033[0m\]"      # reset
 export PS1="$COLOR_DOMAIN\u@\h: $COLOR_PATH\w$COLOR_BRANCH \$(git name-rev --name-only HEAD 2> /dev/null) $COLOR_DOLLAR\$$COLOR_NONE "
 
 # Common directories.
-# $TOOLS is expected to be set before calling this file.
-# FIXME: Enforce this!
+export TOOLS=$HOME/Tools/
 export SOURCES=$HOME/Projects/
 export SCRIPTS=$TOOLS/Scripts/
 

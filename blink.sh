@@ -10,14 +10,14 @@ function setup_Blink_Env()
     export PATH=$PATH:$CHROMIUM_ROOT/third_party/WebKit/Tools/Scripts
 
     # Force the component build, better for incremental builds.
-    export GYP_DEFINES="component=shared_library"
+    export GYP_DEFINES+=" component=shared_library"
 
     cd $CHROMIUM_ROOT
 }
 
 function update_Blink()
 {
-    git pull -r && pushd third_party/WebKit/ && git pull -r && popd && gclient sync
+    git pull -r && gclient sync
 }
 
 # Define some alias to be shared.
