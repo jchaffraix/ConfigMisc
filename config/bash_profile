@@ -8,7 +8,7 @@ COLOR_PATH="\[\033[1;34m\]"   # bold blue
 COLOR_BRANCH="\[\033[1;33m\]" # yellow
 COLOR_DOLLAR="\[\033[0;37m\]" # white
 COLOR_NONE="\[\033[0m\]"      # reset
-export PS1="$COLOR_DOMAIN\u@\h: $COLOR_PATH\w$COLOR_BRANCH \$(git name-rev --name-only HEAD 2> /dev/null) $COLOR_DOLLAR\$$COLOR_NONE "
+export PS1="$COLOR_DOMAIN\u@\h: $COLOR_PATH\w$COLOR_BRANCH \$(git rev-parse --abbrev-ref HEAD 2> /dev/null) $COLOR_DOLLAR\$$COLOR_NONE "
 
 # Common directories.
 export TOOLS=$HOME/Tools/
