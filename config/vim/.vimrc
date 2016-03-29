@@ -1,3 +1,6 @@
+"No need for the old compatibilty.
+set nocompatible
+
 "WebKit coding style
 set softtabstop=4
 set tabstop=4
@@ -23,5 +26,14 @@ set smartcase
 "Ruler gives the position. It's off on Mac.
 set ruler
 
-"Highlight anything wider than 80 columns
+"Highlight anything wider than 80 columns.
 match ErrorMsg '\%>80v.\+'
+
+"Disable visual bells.
+set noerrorbells
+set visualbell
+set t_vb=
+
+"Maps ';' to ':' to avoid shifting.
+nore ; :
+nore , ;
