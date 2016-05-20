@@ -1,0 +1,104 @@
+#!/usr/bin/python
+
+import re
+import subprocess
+import sys
+
+DEBUG = False
+MASTER = "master"
+
+# TODO(jchaffraix): Move to its own file as a helper.
+class GitWrapper(object):
+  """This class wraps all the command send to git."""
+
+  def __init__(self):
+    self.git_path = "/usr/bin/git"
+    pass
+
+  @staticmethod
+  def _RunCommand(command):
+    if DEBUG:
+      print command
+    process = subprocess.Popen(command, shell=False, stdout=subprocess.PIPE)
+    process.wait()
+    return (process.returncode, process.stdout.read().strip())
+
+  def GetBranchList(self):
+    """Returns a list of all the git branches."""
+    (return_code, long_branches) = self._RunCommand([self.git_path, "for-each-ref", "--format='%(refname)'", "refs/heads"])
+
+    if return_code is not 0:
+      raise RuntimeError("Couldn't read branches from git (bad setup?)")
+
+    # Remove 'refs/heads' from the branches as this confuses git.
+    branches = []
+    for branch in long_branches.split('\n'):
+      branches.append(branch[12:-1])
+    return branches
+
+  def SwitchBranch(self, branch, is_new_branch):
+    """Switch to a new branch."""
+    if is_new_branch:
+      (return_code, long_branches) = self._RunCommand([self.git_path, "checkout", "-b", branch])
+    else:
+      (return_code, long_branches) = self._RunCommand([self.git_path, "checkout", branch])
+
+    if return_code is not 0:
+      raise RuntimeError("Couldn't read branches from git (bad setup?)")
+
+def printChoices(branches):
+  i = 1
+  for branch in branches:
+    print "%d -> %s" % (i, branch)
+    i = i + 1
+
+def selectChoice(branches, choice):
+  """Converts the |choice| into an actual git branch. If anything doesn't work, the function will raise an Exception. """
+  try:
+    # Try to interpret choice as an int.
+    idx = int(choice)
+    # If |idx| is OOB, this will throw an exception.
+    return (branches[idx - 1], False)
+  except:
+    potential_branches = []
+    for branch in branches:
+      # We use search so that we can match anyhwere in the branch name.
+      if re.search(choice, branch, re.IGNORECASE):
+        potential_branches.append(branch)
+
+    if len(potential_branches) > 1:
+      raise RuntimeError("Ambiguous choice")
+    elif len(potential_branches) is 0:
+      confirm = raw_input("Create the branch? [Y/n]")
+      if len(confirm) > 0 and (confirm[0] == 'n' or confirm[0] == 'N'):
+        raise RuntimeError("Refused to create a new branch")
+      return [choice, True]
+
+    return (potential_branches[0], False)
+
+if __name__ == "__main__":
+  branches = GitWrapper().GetBranchList()
+  selected_branch = None
+  if len(sys.argv) >= 2:
+    selected_branch = sys.argv[1]
+
+  while True:
+    if not selected_branch:
+      printChoices(branches)
+      choice = raw_input("Choice? ")
+      if len(choice) is 0:
+        break;
+    else:
+      choice = selected_branch
+    try:
+      (branch, is_new_branch) = selectChoice(branches, choice)
+      # TODO(jchaffraix): Support nested branches.
+      if is_new_branch:
+        GitWrapper().SwitchBranch(MASTER, False)
+      GitWrapper().SwitchBranch(branch, is_new_branch)
+      break
+    except Exception as e:
+      # Clear selected_branch to give a choice if something happened.
+      selected_branch = None
+      print e
+

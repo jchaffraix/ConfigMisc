@@ -43,7 +43,7 @@ function checkout() {
 
     git checkout $@
 }
-alias gco=checkout
+alias gco="git-co"
 alias gcm="git checkout master"
 alias grbc="git rebase --continue"
 alias grba="git rebase --abort"
