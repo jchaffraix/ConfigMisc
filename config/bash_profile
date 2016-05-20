@@ -32,6 +32,29 @@ alias scg="setup_ChromiumGardening"
 alias sb="setup_Blink"
 alias sbg="setup_Blink_Glitter"
 
+alias sp="cd ~/PrivateProjects/papyrus/google3/"
+
+function checkout() {
+    if [ $# -eq 0 ]
+    then
+        echo "Missing branch name"
+        return 1
+    fi
+
+    git checkout $@
+}
+alias gco=checkout
+alias gcm="git checkout master"
+alias grbc="git rebase --continue"
+alias grba="git rebase --abort"
+
+alias glb="git lb"
+alias gd="git diff"
+alias gdm="git diff master"
+
+alias gca="git commit --amend"
+alias gcaa="git commit --amend -a"
+
 function git_grep_to_vim() {
     if [ -z $1 ]
     then
@@ -49,3 +72,9 @@ alias gg="git grep"
 export GYP_GENERATORS='ninja'
 
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+
+# Private scripts.
+export PATH=$PATH:$TOOLS/Private/git
+
+# Override default perforce diff (gtkdiff).
+export P4DIFF="diff -u"
