@@ -67,7 +67,7 @@ def selectChoice(branches, choice):
         potential_branches.append(branch)
 
     if len(potential_branches) > 1:
-      raise RuntimeError("Ambiguous choice")
+      raise RuntimeError("Ambiguous choice: " + str(potential_branches))
     elif len(potential_branches) is 0:
       confirm = raw_input("Create the branch? [Y/n]")
       if len(confirm) > 0 and (confirm[0] == 'n' or confirm[0] == 'N'):
