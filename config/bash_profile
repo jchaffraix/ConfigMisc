@@ -73,8 +73,14 @@ export GYP_GENERATORS='ninja'
 
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 
-# Private scripts.
-export PATH=$PATH:$TOOLS/Private/git
+export EDITOR="vim"
 
 # Override default perforce diff (gtkdiff).
 export P4DIFF="diff -u"
+
+# Private scripts and commands.
+export PRIVATE_PROJECTS=$TOOLS/Private/
+export PATH=$PATH:$PRIVATE_PROJECTS/git
+if [[ -e $PRIVATE_PROJECTS/config/.bash_profile ]]; then
+  source $PRIVATE_PROJECTS/config/.bash_profile
+fi
