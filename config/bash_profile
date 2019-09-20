@@ -15,34 +15,10 @@ export TOOLS=$HOME/Tools/
 export SOURCES=$HOME/Projects/
 export SCRIPTS=$TOOLS/Scripts/
 
-export PATH=$TOOLS/depot_tools:$PATH:$SCRIPTS/git
+# VIM.
+export EDITOR="vim"
 
-source $SCRIPTS/blink.sh
-source $SCRIPTS/chromium.sh
-
-alias setup_Chromium="setup_Chromium_Env $SOURCES/Chromium/src"
-alias setup_ChromiumGardening="setup_Chromium_Env $SOURCES/Gardening/ChromiumCommit/src"
-
-alias setup_Blink="setup_Blink_Env $SOURCES/Blink/src"
-alias setup_Blink_Glitter="setup_Blink_Env $SOURCES/GlitterBlink/src"
-
-alias sc="setup_Chromium"
-alias scg="setup_ChromiumGardening"
-
-alias sb="setup_Blink"
-alias sbg="setup_Blink_Glitter"
-
-alias sp="cd ~/PrivateProjects/papyrus/google3/"
-
-function checkout() {
-    if [ $# -eq 0 ]
-    then
-        echo "Missing branch name"
-        return 1
-    fi
-
-    git checkout $@
-}
+# Git.
 alias gco="git-co"
 alias gcm="git checkout master"
 alias grbc="git rebase --continue"
@@ -67,13 +43,6 @@ function git_grep_to_vim() {
 alias vig=git_grep_to_vim
 
 alias gg="git grep"
-
-# Ninja
-export GYP_GENERATORS='ninja'
-
-export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-
-export EDITOR="vim"
 
 # Override default perforce diff (gtkdiff).
 export P4DIFF="diff -u"
