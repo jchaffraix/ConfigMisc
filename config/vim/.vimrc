@@ -1,10 +1,10 @@
 "No need for the old compatibilty.
 set nocompatible
 
-"WebKit coding style
-set softtabstop=4
-set tabstop=4
-set shiftwidth=4
+"Google coding style
+set softtabstop=2
+set tabstop=2
+set shiftwidth=2
 
 set shiftround
 set expandtab
@@ -14,20 +14,14 @@ set autoindent
 syntax on
 
 "If the search is lower case, ignore case
+set ignorecase
 set smartcase
 
 "Show the command
 set showcmd
 
-"Searching
-set ignorecase
-set smartcase
-
 "Ruler gives the position. It's off on Mac.
 set ruler
-
-"Highlight anything wider than 80 columns.
-match ErrorMsg '\%>80v.\+'
 
 "Disable visual bells.
 set noerrorbells
