@@ -1,5 +1,3 @@
-The screen scripts assumes that they are in ~/.screen.
+To install:
 
-The normal scripts assumes that they are in ~/.scripts.
-
-You can use a soft link to avoid duplicating the information.
+python `curl -O https://raw.githubusercontent.com/jchaffraix/ConfigMisc/master/install.py`
