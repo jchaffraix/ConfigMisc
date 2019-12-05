@@ -1,7 +1,9 @@
 [user]
-    name = Julien Chaffraix
-    email = julien.chaffraix@gmail.com
+  name = Julien Chaffraix
+  email = julien.chaffraix@gmail.com
 [color]
-    ui = 1
+  ui = 1
 [push]
-	default = simple
+  default = simple
+[pager]
+  branch = false
